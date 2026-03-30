@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jiggabyte | Command Center</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon"></div>
+                <h2>JIGGABYTE</h2>
+                <p>AGENT ORCHESTRATOR</p>
+            </div>
+            
+            <div class="product-selector">
+                <label>ACTIVE PRODUCT</label>
+                <select id="nicheSwitcher">
+                    <!-- High Priority B2B SaaS -->
+                    <optgroup label="B2B Sales & Ops">
+                        <option value="prop_engage">PropEngage AI (Real Estate)</option>
+                        <option value="biz_desk">BizDesk AI (SME Copilot)</option>
+                        <option value="guest_flow">GuestFlow AI (Hospitality)</option>
+                        <option value="web_prime" selected>WebPrime (Web & E-com)</option>
+                    </optgroup>
+                    <!-- Education & Talent -->
+                    <optgroup label="Edu & Talent">
+                        <option value="edu_match">EduMatch AI (Course Guide)</option>
+                        <option value="skill_bridge">SkillBridge AI (Internships)</option>
+                        <option value="docu_admit">DocuAdmit AI (Admissions)</option>
+                    </optgroup>
+                    <!-- Specialized Vertical Solutions -->
+                    <optgroup label="Government & Legal">
+                        <option value="pacra_assist">PACRA-Assist AI (Compliance)</option>
+                        <option value="civic_assist">CivicAssist (Gov Navigator)</option>
+                        <option value="border_flow">BorderFlow AI (Customs)</option>
+                    </optgroup>
+                    <optgroup label="Agriculture & Health">
+                        <option value="agri_vision">AgriVision Bot (Diseases)</option>
+                        <option value="agri_connect">AgriConnect AI (Alerts)</option>
+                        <option value="medi_connect">MediConnect AI (Health)</option>
+                    </optgroup>
+                    <optgroup label="Fintech & Data">
+                        <option value="credi_score">CrediScore Africa (Scoring)</option>
+                        <option value="spaza_sync">SpazaSync AI (Retail)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-target="dashboard">
+                    <span class="icon">⌂</span> COMMAND CENTER
+                </button>
+                <button class="nav-btn" data-target="vault">
+                    <span class="icon">☖</span> THE VAULT
+                </button>
+                <button class="nav-btn" data-target="settings">
+                    <span class="icon">⚙</span> SETTINGS
+                </button>
+            </nav>
+
+            <div class="system-monitor">
+                <div class="monitor-item">
+                    <span class="label">FLEET STATUS</span>
+                    <span class="value success">OPERATIONAL</span>
+                </div>
+                <div class="monitor-item">
+                    <span class="label">ACTIVE AGENTS</span>
+                    <span class="value" id="activeAgentsCount">0</span>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="content-area">
+            
+            <!-- Command Center View -->
+            <section id="dashboard" class="view active">
+                <header class="view-header">
+                    <div>
+                        <h1 id="productLabel">CLINIC HUNTER</h1>
+                        <p id="productSolution">24/7 AI RECEPTIONIST PIPELINE</p>
+                    </div>
+                    <div class="header-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">LEADS IN VAULT</span>
+                            <span class="stat-value" id="totalLeadsCount">0</span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Product Info & Pricing -->
+                <div class="product-info-grid">
+                    <div class="card info-card">
+                        <h3>PRODUCT SPECIFICATION</h3>
+                        <div id="productDescription" class="product-desc-text">Fetching details...</div>
+                    </div>
+                    <div class="card pricing-card">
+                        <h3>PRICING (USD RANGE)</h3>
+                        <div class="price-input-group">
+                            <input type="text" id="priceRangeInput" placeholder="e.g. $500 - $1500">
+                            <button id="savePriceBtn" class="btn secondary small">UPDATE</button>
+                        </div>
+                        <p class="hint">This range appears in your auto-generated sales copy.</p>
+                    </div>
+                </div>
+
+                <div class="pipeline-grid">
+                    <!-- Stage 1: Scout -->
+                    <div class="pipeline-card stage-1">
+                        <div class="stage-header">
+                            <span class="stage-num">01</span>
+                            <h3>THE SCOUT</h3>
+                            <span class="status-dot idle"></span>
+                        </div>
+                        <p class="stage-desc">Discovering businesses via Google Maps & Web presence.</p>
+                        
+                        <form id="scrapeForm" class="pipeline-form">
+                            <div class="form-group">
+                                <label>QUERY</label>
+                                <input type="text" id="searchQuery" placeholder="e.g. Medical Clinic" required>
+                            </div>
+                            <div class="form-group">
+                                <label>LOCATION</label>
+                                <input type="text" id="locationCity" placeholder="e.g. Lusaka, ZM" required>
+                            </div>
+                            <div class="form-group">
+                                <label>COUNTRY (SADC)</label>
+                                <select id="countryCode">
+                                    <option value="ZA">South Africa</option>
+                                    <option value="ZM" selected>Zambia</option>
+                                    <option value="ZW">Zimbabwe</option>
+                                    <option value="BW">Botswana</option>
+                                    <option value="NA">Namibia</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn primary" id="runScraperBtn">INITIALIZE SCOUT</button>
+                        </form>
+                    </div>
+
+                    <!-- Stage 2: Quantify -->
+                    <div class="pipeline-card stage-2">
+                        <div class="stage-header">
+                            <span class="stage-num">02</span>
+                            <h3>THE SPECIALIST</h3>
+                            <span class="status-dot idle"></span>
+                        </div>
+                        <p class="stage-desc">Analyzing booking friction & quantifying technical deficits.</p>
+                        <div class="stage-action">
+                            <button class="btn secondary" id="runQuantifyBtn">QUANTIFY VAULT</button>
+                            <p class="hint">Analyzes all leads currently in the vault for this niche.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: Reach -->
+                    <div class="pipeline-card stage-3">
+                        <div class="stage-header">
+                            <span class="stage-num">03</span>
+                            <h3>THE OPERATIVE</h3>
+                            <span class="status-dot idle"></span>
+                        </div>
+                        <p class="stage-desc">Executing personalized outreach via AI-drafted copy.</p>
+                        <div class="stage-action">
+                            <button class="btn primary" id="runReachBtn">EXECUTE OUTREACH</button>
+                            <p class="hint">Sends pitches to leads with 'COPY_DRAFTED' status.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Agent Feed -->
+                <div class="agent-feed">
+                    <div class="feed-header">
+                        <h3>LIVE AGENT FEED</h3>
+                        <div class="feed-controls">
+                            <span id="scrapeTime">0s</span>
+                            <button class="btn icon-btn" id="clearLogs">×</button>
+                        </div>
+                    </div>
+                    <div id="scrapeLogs" class="log-container">
+                        [SYSTEM] Awaiting command...
+                    </div>
+                </div>
+            </section>
+
+            <!-- The Vault View -->
+            <section id="vault" class="view">
+                <header class="view-header">
+                    <div>
+                        <h1>THE VAULT</h1>
+                        <p>SECURE LEAD REPOSITORY & REVIEW</p>
+                    </div>
+                    <button id="refreshLeadsBtn" class="btn secondary">SYNC DATA</button>
+                </header>
+
+                <div class="table-container">
+                    <table class="leads-table">
+                        <thead>
+                            <tr>
+                                <th>COMPANY</th>
+                                <th>LOCATION</th>
+                                <th>DEFICIT</th>
+                                <th>METHOD</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings View -->
+            <section id="settings" class="view">
+                <header class="view-header">
+                    <h1>SETTINGS</h1>
+                    <p>SYSTEM CONFIGURATION & API KEYS</p>
+                </header>
+                <div class="card settings-card">
+                    <form id="settingsForm">
+                        <div class="form-group">
+                            <label>GEMINI API KEY</label>
+                            <input type="password" id="geminiApiKey" placeholder="ENTER KEY">
+                        </div>
+                        <div class="button-group">
+                            <button type="submit" class="btn primary">SAVE CONFIG</button>
+                            <button type="button" id="testGeminiBtn" class="btn secondary">TEST API</button>
+                        </div>
+                    </form>
+                    <div id="settingsStatus" class="status-msg hidden"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-header">
+                <h2>LEAD REVIEW: <span id="modalCompanyName"></span></h2>
+                <div class="badge" id="modalDeficitBadge"></div>
+            </div>
+            
+            <div class="modal-body">
+                <div class="data-panel">
+                    <h3>RAW INTELLIGENCE</h3>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <span class="label">LOCATION</span>
+                            <span class="value" id="modalLocation"></span>
+                        </div>
+                        <div class="data-item">
+                            <span class="label">WEBSITE</span>
+                            <a href="#" id="modalWebsiteUrl" target="_blank" class="value link">OPEN SITE</a>
+                        </div>
+                        <div class="data-item">
+                            <span class="label">BOOKING</span>
+                            <span class="value" id="modalBookingMethod"></span>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top:2rem">ANALYSIS</h3>
+                    <div class="notes-box" id="modalFrictionNotes"></div>
+                </div>
+                
+                <div class="ai-copy-panel">
+                    <h3>AI OUTREACH PITCH</h3>
+                    <textarea id="modalAiCopy" placeholder="AGENT THINKING..."></textarea>
+                    <div class="modal-actions">
+                        <button id="generateCopyBtn" class="btn primary">RE-GENERATE</button>
+                        <button id="saveLeadBtn" class="btn secondary">APPROVE & SAVE</button>
+                    </div>
+                    <div id="copyStatus" class="status-msg hidden"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
